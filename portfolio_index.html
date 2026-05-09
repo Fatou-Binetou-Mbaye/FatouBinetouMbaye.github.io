@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fatou Binetou Mbaye — Data Scientist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --ivory:     #F7F4EF;
+      --parchment: #EDE8DF;
+      --stone:     #C9C2B4;
+      --charcoal:  #34342f;
+      --ink:       #34342f;
+      --gold:      #34342f;
+      --gold-light:#C4A06A;
+      --mist:      #6B6860;
+      --serif:     'Cormorant Garamond', Georgia, serif;
+      --sans:      'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ivory);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(247, 244, 239, 0.93);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--stone);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mist);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding-top: 60px;
+      position: relative;
+    }
+
+    .hero-left { padding: 6rem 4rem 6rem 8vw; }
+
+    .hero-tag {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 32px; height: 1px;
+      background: var(--gold);
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 4.5vw, 5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    h1 em { font-style: italic; color: var(--gold); }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--mist);
+      max-width: 400px;
+      margin-bottom: 2.5rem;
+      line-height: 1.85;
+    }
+
+    .btn-primary-custom {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      background: var(--ink);
+      color: var(--ivory);
+      font-family: var(--sans);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-primary-custom:hover { background: var(--gold); color: var(--ivory); }
+
+    .btn-outline-custom {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      border: 1px solid var(--charcoal);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      margin-left: 1rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-outline-custom:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-right {
+      background: var(--charcoal);
+      height: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background-image: url("binetou_photo.png");
+
+    }
+
+    .hero-initials {
+      width: 350px; height: 320px;
+      background: #C5B49C;
+      display: flex;
+      background-size: cover;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 5rem;
+      font-weight: 300;
+      color: var(--ivory);
+      letter-spacing: 0.05em;
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(139,111,62,0.3);
+      display: none;
+    }
+
+    .hero-deco {
+      position: absolute;
+      width: 300px; height: 300px;
+      border: 1px solid rgba(139,111,62,0.25);
+      bottom: 80px; right: 80px;
+      display: none;
+     
+    }
+
+    .hero-deco2 {
+      position: absolute;
+      width: 370px; height: 160px;
+      border: 1px solid rgba(139,111,62,0.15);
+      top: 70px; left: 20px;
+       background-image: url("logoaims.png");
+
+    } 
+
+    .stats-row {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--stone);
+    }
+
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-top: 4px;
+    }
+
+    section { position: relative; z-index: 1; }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--gold);
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    h2 em { font-style: italic; color: var(--gold); }
+
+    /* ABOUT */
+    #about { padding: 7rem 8vw; background: var(--ivory); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+      margin-top: 3.5rem;
+    }
+
+    .about-text p {
+      color: var(--mist);
+      margin-bottom: 1.25rem;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .lang-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .lang-pill {
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      padding: 5px 14px;
+      border: 1px solid var(--stone);
+      color: var(--charcoal);
+    }
+
+    .lang-pill span { color: var(--gold); font-weight: 500; margin-left: 4px; }
+
+    .skills-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .skill-item {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--parchment);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .skill-name { font-size: 13px; color: var(--charcoal); }
+
+    .skill-bar {
+      width: 70px; height: 2px;
+      background: var(--parchment);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-bar::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: var(--gold);
+      width: var(--pct);
+      transition: width 1.1s ease;
+    }
+
+    /* EDUCATION */
+    #education {
+      padding: 7rem 8vw;
+      background: var(--charcoal);
+      color: var(--ivory);
+    }
+
+    #education .section-label { color: var(--gold-light); }
+    #education .section-label::before { background: var(--gold-light); }
+    #education h2 { color: var(--ivory); }
+    #education h2 em { color: var(--gold-light); }
+
+    .edu-timeline {
+      margin-top: 3.5rem;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .edu-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 1px;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .edu-item {
+      position: relative;
+      padding-bottom: 3rem;
+      padding-left: 2rem;
+    }
+
+    .edu-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem; top: 8px;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--gold-light);
+      transform: translateX(-3px);
+    }
+
+    .edu-period {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-degree {
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      font-weight: 400;
+      color: var(--ivory);
+      margin-bottom: 0.2rem;
+    }
+
+    .edu-school {
+      font-size: 13px;
+      color: var(--stone);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.6rem;
+    }
+
+    .edu-desc {
+      font-size: 14px;
+      color: rgba(247,244,239,0.55);
+      max-width: 540px;
+      line-height: 1.8;
+    }
+
+    /* EXPERIENCE */
+    #experience { padding: 7rem 8vw; background: var(--parchment); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      margin-top: 3.5rem;
+    }
+
+    .project-card {
+      background: var(--ivory);
+      padding: 2rem 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--gold);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover::before { transform: scaleY(1); }
+    .project-card:hover { background: #EDE8DC; }
+
+    .proj-role {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+
+    .proj-title {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+
+    .proj-org {
+      font-size: 12px;
+      color: var(--mist);
+      letter-spacing: 0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    .proj-desc {
+      font-size: 13px;
+      color: var(--mist);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+
+    .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .tech-badge {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      background: var(--parchment);
+      color: var(--mist);
+    }
+
+    /* SKILLS */
+    #skills { padding: 7rem 8vw; background: var(--ivory); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+
+    .skill-category { border-top: 2px solid var(--gold); padding-top: 1.25rem; }
+
+    .skill-cat-title {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .skill-tag {
+      font-size: 12px;
+      padding: 4px 12px;
+      border: 1px solid var(--stone);
+      color: var(--charcoal);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .skill-tag:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* CONTACT */
+    #contact {
+      padding: 7rem 8vw;
+      background: var(--ink);
+      color: var(--ivory);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    #contact .section-label { color: var(--gold-light); }
+    #contact .section-label::before { background: var(--gold-light); }
+    #contact h2 { color: var(--ivory); }
+    #contact h2 em { color: var(--gold-light); }
+
+    .contact-text {
+      font-size: 15px;
+      color: rgba(247,244,239,0.55);
+      line-height: 1.9;
+      margin-top: 1.5rem;
+    }
+
+    .contact-links { display: flex; flex-direction: column; }
+
+    .contact-link-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--ivory);
+      transition: color 0.2s;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .contact-link-item:hover { color: var(--gold-light); }
+
+    .contact-link-icon {
+      width: 40px; height: 40px;
+      border: 1px solid rgba(196,160,106,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      transition: border-color 0.2s;
+    }
+
+    .contact-link-item:hover .contact-link-icon { border-color: var(--gold-light); }
+
+    .contact-link-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 2px;
+    }
+
+    .contact-link-value { font-size: 14px; color: var(--ivory); }
+
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.5rem 8vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer span {
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: rgba(247,244,239,0.3);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.12s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 7rem 2rem 4rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      #contact { grid-template-columns: 1fr; gap: 3rem; }
+      .stats-row { gap: 1.5rem; }
+      .skills-list { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#">F. B. Mbaye</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <div class="hero-tag">Data Scientist & Applied Mathematics</div>
+      <h1>Fatou<br /><em>Binetou</em><br />Mbaye</h1>
+      <p class="hero-sub">
+        Passionate about applied mathematics and data science, with strong foundations in finance and social sciences. Turning complex data into clear, actionable insight.So Mathematics is my language. Data is my raw material. Impact is my output. I bring together quantitative precision and cross-disciplinary depth ,from finance to social sciences to build solutions that cut through noise and drive decisions forward.
+      </p>
+      <a href="#experience" class="btn-primary-custom">View Projects</a>
+      <a href="#contact" class="btn-outline-custom">Get in Touch</a>
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Languages</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Degrees</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">SN</div>
+          <div class="stat-label">Senegal</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-initials"></div>
+      <div class="hero-deco"></div>
+      <div class="hero-deco2"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="reveal">
+      <div class="section-label">About Me</div>
+      <h2>Rigorous, driven &amp;<br /><em>analytically</em> curious.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal reveal-delay-1">
+        <p>
+          I am a Data Scientist and Applied Mathematics specialist currently pursuing a Master's in Big Data Science at AIMS Senegal , one of Africa's leading mathematical sciences institutes. My academic path has been built on a deep passion for mathematics and its real-world applications in finance and social sciences.
+        </p>
+        <p>
+          Serious, motivated, and highly logical, I am always fully invested in my work while maintaining a strong professional standard. I believe great data science is not only about models , it is about understanding context, asking the right questions, and communicating results with clarity and purpose.
+        </p>
+        <p>
+          Beyond academics, I have led student organisations, managed institutional finances, and engaged in collaborative community environments  skills I carry directly into every data-driven team I join.
+        </p>
+        <div style="margin-top: 1.75rem;">
+          <div class="section-label" style="margin-bottom: 0.75rem;">Languages</div>
+          <div class="lang-row">
+            <div class="lang-pill">French <span>Advanced</span></div>
+            <div class="lang-pill">English <span>Intermediate</span></div>
+            <div class="lang-pill">Wolof <span>Native</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <div class="section-label" style="margin-bottom: 1rem;">Core Competencies</div>
+        <div class="skills-list">
+        <div class="skill-item">
+            <span class="skill-name">Statistics &amp; Probability</span>
+            <div class="skill-bar" style="--pct: 92%"></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Python / R</span>
+            <div class="skill-bar" style="--pct: 88%"></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Excel / Office / word</span>
+            <div class="skill-bar" style="--pct: 90%"></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Data Analysis</span>
+            <div class="skill-bar" style="--pct: 90%"></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Mathematical Finance</span>
+            <div class="skill-bar" style="--pct: 85%"></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Machine Learning</span>
+            <div class="skill-bar" style="--pct: 82%"></div>
+          </div><div class="skill-item">
+            <span class="skill-name">Deep Learning</span>
+            <div class="skill-bar" style="--pct: 79%"></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Computer Vision</span>
+            <div class="skill-bar" style="--pct: 82%"></div>
+          </div>
+
+          <div class="skill-item">
+            <span class="skill-name">LaTeX / Scilab</span>
+            <div class="skill-bar" style="--pct: 78%"></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">C++</span>
+            <div class="skill-bar" style="--pct: 65%"></div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="reveal">
+      <div class="section-label">Education</div>
+      <h2>Academic path built on<br /><em>mathematical</em> rigour.</h2>
+    </div>
+    <div class="edu-timeline">
+
+      <div class="edu-item reveal">
+        <div class="edu-period">2025 — 2027 · In Progress</div>
+        <div class="edu-degree">Master in Big Data Science</div>
+        <div class="edu-school">AIMS Senegal (African Institute for Mathematical Sciences)</div>
+        <div class="edu-desc">
+          Advanced study of big data engineering, machine learning at scale, statistical modelling,Web development and Android  ,Computer Vision ,Natural Language Processing ,and data-driven research methods within Africa's foremost mathematical sciences institution.
+        </div>
+      </div>
+
+      <div class="edu-item reveal">
+        <div class="edu-period">2023 — 2024</div>
+        <div class="edu-degree">Master in Applied Mathematics &amp; Finance · Data Science </div>
+        <div class="edu-school"> Gaston Berger University of Saint-Louis</div>
+        <div class="edu-desc">
+          Specialised programme combining quantitative finance, applied mathematics, and data science methods with deep focus on probabilistic modelling, time series analysis, and computational techniques.
+        </div>
+      </div>
+
+      <div class="edu-item reveal">
+        <div class="edu-period">2021 — 2022</div>
+        <div class="edu-degree">Licence in Applied Mathematics, Data Science &amp; Finance</div>
+        <div class="edu-school"> Gaston Berger University of Saint-Louis</div>
+        <div class="edu-desc">
+          Solid undergraduate grounding in mathematics, probability theory, statistics, and their applications in data science and financial modelling , the foundation for advanced graduate study.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE & PROJECTS -->
+  <section id="experience">
+    <div class="reveal">
+      <div class="section-label">Experience &amp; Projects</div>
+      <h2>Leadership, initiative &amp;<br /><em>analytical</em> work.</h2>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="proj-role">2017 — 2019 · Student Leadership</div>
+        <div class="proj-title">Treasurer</div>
+        <div class="proj-org">Association des Étudiants de Pikine Dagoudane (AERPD) — UGB</div>
+        <div class="proj-desc">
+          Managed full financial operations of the student association at Université Gaston Berger — including budget planning, fund tracking, financial reporting, and transparent accounting across all activities.
+        </div>
+        <div class="project-tech">
+          <span class="tech-badge">Financial Management</span>
+          <span class="tech-badge">Budgeting</span>
+          <span class="tech-badge">Leadership</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="proj-role">2014 — 2015 · High School Leadership</div>
+        <div class="proj-title">Treasurer — Science &amp; English Clubs · Vice President</div>
+        <div class="proj-org">Lycée de Pikine · Association des Jeunes de Pikine</div>
+        <div class="proj-desc">
+          Simultaneously managed finances for two clubs and served as Vice President of a youth association. Developed organisational, financial, and cross-team coordination skills early on.
+        </div>
+        <div class="project-tech">
+          <span class="tech-badge">Organisation</span>
+          <span class="tech-badge">Team Coordination</span>
+          <span class="tech-badge">Public Speaking</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="proj-role">Academic Project · Master UGB</div>
+        <div class="proj-title">Statistical &amp; Financial Modelling</div>
+        <div class="proj-org">Université Gaston Berger · Applied Mathematics &amp; Finance Programme</div>
+        <div class="proj-desc">
+          Applied quantitative methods to real-world financial datasets, including regression analysis, time series forecasting, and risk modelling. Built and deployed models in R and Python, with full documentation produced in LaTeX. Hands-on project work in risk management using major market indices the S&P 500 and CAC 40 for modelling volatility, estimating Value at Risk (VaR), and analysing tail risk to simulate how prices respond under market stress.
+        </div>
+        <div class="project-tech">
+          <span class="tech-badge">R</span>
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">LaTeX</span>
+          <span class="tech-badge">Statistics</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="proj-role">Academic Project · AIMS Senegal</div>
+        <div class="proj-title">Machine Learning &amp; Data Analysis</div>
+        <div class="proj-org">AIMS Senegal · Big Data Science Programme</div>
+        <div class="proj-desc">
+          Deep Learning — Competitive Model Training
+Participated in a deep learning competition focused on pushing model performance to its limits. Designed, trained, and iteratively optimized neural network architectures to achieve the best possible score, benchmarking results against peers. This project sharpened skills in model tuning, hyperparameter optimization, and performance evaluation under competitive conditions.
+        </div>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Scilab</span>
+          <span class="tech-badge">Machine Learning</span>
+          <span class="tech-badge">EDA</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="proj-role">Academic Project · AIMS Senegal</div>
+        <div class="proj-title">Machine Learning &amp; Deep Learning</div>
+        <div class="proj-org">AIMS Senegal · Big Data Science Programme</div>
+        <div class="proj-desc">
+          Computer Vision — Image Classification Application
+Built and deployed a fully functional image classification application using two deep learning frameworks PyTorch and TensorFlow , running in parallel to compare outputs and robustness. The app accepts an input image and returns a classification prediction, offering a practical demonstration of how production-ready AI models can be served to end users.
+        </div>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Decision Trees & Random Forest</span>
+          <span class="tech-badge">Machine Learning</span>
+          <span class="tech-badge">Hierarchical Clustering</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="proj-role">Academic Project · AIMS Senegal</div>
+        <div class="proj-title">Machine Learning &amp; Data Analysis</div>
+        <div class="proj-org">AIMS Senegal · Big Data Science Programme</div>
+        <div class="proj-desc">
+          Supervised & Unsupervised Learning
+Worked on a range of classical machine learning problems using Python ; covering classification tasks, data cleaning pipelines, and exploratory analysis of socio-economic datasets. Built end-to-end workflows from raw data ingestion to model evaluation, applying both supervised and unsupervised techniques to extract meaningful patterns from complex, real-world data.
+        </div>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">K-Nearest Neighbors (KNN)</span>
+          <span class="tech-badge">Machine Learning</span>
+          <span class="tech-badge">Hierarchical Clustering</span>
+        </div>
+      </div>
+
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="reveal">
+      <div class="section-label">Technical Skills</div>
+      <h2>Tools &amp; <em>technologies</em><br />I work with.</h2>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-category reveal">
+        <div class="skill-cat-title">Programming</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">R</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">CodeBlocks</span>
+        </div>
+      </div>
+
+      <div class="skill-category reveal reveal-delay-1">
+        <div class="skill-cat-title">Data Science</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Machine Learning</span>
+          <span class="skill-tag">Data Analysis</span>
+          <span class="skill-tag">Statistics</span>
+          <span class="skill-tag">Probability</span>
+        </div>
+      </div>
+
+      <div class="skill-category reveal reveal-delay-2">
+        <div class="skill-cat-title">Mathematics</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Applied Mathematics</span>
+          <span class="skill-tag">Mathematical Finance</span>
+          <span class="skill-tag">Optimisation</span>
+          <span class="skill-tag">Linear Algebra</span>
+        </div>
+      </div>
+
+      <div class="skill-category reveal">
+        <div class="skill-cat-title">Tools &amp; Office</div>
+        <div class="skill-tags">
+          <span class="skill-tag">LaTeX</span>
+          <span class="skill-tag">Excel</span>
+          <span class="skill-tag">PowerPoint</span>
+          <span class="skill-tag">Word</span>
+        </div>
+      </div>
+
+      <div class="skill-category reveal reveal-delay-1">
+        <div class="skill-cat-title">Soft Skills</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Analytical Thinking</span>
+          <span class="skill-tag">Rigour</span>
+          <span class="skill-tag">Leadership</span>
+          <span class="skill-tag">Communication</span>
+        </div>
+      </div>
+
+      <div class="skill-category reveal reveal-delay-2">
+        <div class="skill-cat-title">Interests</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Research</span>
+          <span class="skill-tag">Reading</span>
+          <span class="skill-tag">Sports</span>
+          <span class="skill-tag">Social Media</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="reveal">
+      <div class="section-label">Contact</div>
+      <h2>Open to <em>opportunities</em><br />&amp; collaboration.</h2>
+      <p class="contact-text">
+        Whether you have a research project, a data science challenge, or an internship opportunity , I would like to connect. Let's build something meaningful together.
+      </p>
+    </div>
+    <div class="contact-links reveal reveal-delay-1">
+      <a href="tel:+221772825572" class="contact-link-item">
+        <div class="contact-link-icon">✆</div>
+        <div>
+          <div class="contact-link-label">Phone</div>
+          <div class="contact-link-value">+221 77 282 55 72</div>
+        </div>
+      </a>
+      <a href="mailto:fatou.b.mbaye@aims-senegal.org" class="contact-link-item">
+        <div class="contact-link-icon">✉</div>
+        <div>
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-value">fatou.b.mbaye@aims-senegal.org</div>
+        </div>
+      </a>
+      <div class="contact-link-item" style="cursor: default;">
+        <div class="contact-link-icon">⌖</div>
+        <div>
+          <div class="contact-link-label">Location</div>
+          <div class="contact-link-value">Darou Khoudoss, Mboro Thiès, Senegal</div>
+        </div>
+      </div>
+      <div class="contact-link-item" style="border-bottom: none; cursor: default;">
+        <div class="contact-link-icon">↓</div>
+        <div>
+          <div class="contact-link-label">References</div>
+          <div class="contact-link-value">Available upon request</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Fatou Binetou Mbaye. All rights reserved.</span>
+    <span> Pages</span>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
